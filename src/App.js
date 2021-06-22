@@ -1,12 +1,12 @@
 import React from "react";
-import "./App.scss";
-
+import "./tailwind.css";
+import Loader from "./components/Loader/Loader";
 const App = () => {
   return (
-    <div className="App">
-      <h1>We are Super Powered</h1>
+    <div>
+    
     </div>
-  );
+  )
 };
 
 export default App;
