@@ -1,3 +1,13 @@
+@font-face {
+    font-family: Mak;
+    src: url("./fonts/MAK.otf");
+  }
+  
+  @font-face {
+    font-family: Mak-Bold;
+    src: url("./fonts/MAK-bold.otf");
+  } 
+
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";

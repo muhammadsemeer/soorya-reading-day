@@ -1,12 +1,15 @@
 import React from "react";
 import "./tailwind.css";
-import Loader from "./components/Loader/Loader";
+import Header from "./components/Header/Header"
+import Hero from "./components/Hero/Hero"
+
 const App = () => {
   return (
-    <div>
-    
+    <div className="container mx-auto">
+      <Header />
+      <Hero/>
     </div>
-  )
+  );
 };
 
 export default App;
