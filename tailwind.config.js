@@ -4,9 +4,12 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor: {
-        "l-col": "#101010",
-        "d-col": "#0f0f0f",
+        "l-col": "#232323",
+      },
+      colors:{
+        "light":"#F8F5F1",
         "primary-col": "#d36163;",
+
       },
       transitionTimingFunction: {
         "preLoader-timing": "cubic-bezier(0.19, 1, 0.22, 1)",
@@ -14,14 +17,17 @@ module.exports = {
       spacing: {
         4.0: "40%",
         4.2: "42%",
-        "6px":"0.375rem"
+        "6px": "0.375rem",
+        99: "30rem",
+        97: "27rem",
+        82: "24rem",
       },
-      fontFamily:{
-        "Mak":"Mak",
-        "Mak-Bold":"Mak-Bold",
-        "Cormorant-Unicase" : "Cormorant Unicase",
-        "Mulish":"Mulish",
-      }
+      fontFamily: {
+        Mak: "Mak",
+        "Mak-Bold": "Mak-Bold",
+        "Cormorant-Unicase": "Cormorant Unicase",
+        Mulish: "Mulish",
+      },
     },
   },
   variants: {
