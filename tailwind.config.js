@@ -21,6 +21,7 @@ module.exports = {
         99: "30rem",
         97: "27rem",
         82: "24rem",
+        98:"45rem"
       },
       fontFamily: {
         Mak: "Mak",
