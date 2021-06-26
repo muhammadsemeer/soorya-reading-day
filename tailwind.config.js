@@ -29,6 +29,9 @@ module.exports = {
         "Cormorant-Unicase": "Cormorant Unicase",
         Mulish: "Mulish",
       },
+      screens:{
+        'cs':"1000px"
+      }
     },
   },
   variants: {

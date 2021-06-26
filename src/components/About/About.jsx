@@ -28,9 +28,8 @@ export default function About() {
           The <br /> 19th <br /> Annual <br /> Book
           <br /> Festival
         </span>
-        <div className="absolute right-0 bottom-0 bg-primary-col font-Mulish text-base text-white w-28 h-28 flex items-center justify-center rounded-full">
-          <span>start quiz</span>
-        </div>
+ 
+ 
       </div>
     </div>
   );

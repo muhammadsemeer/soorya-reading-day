@@ -11,9 +11,9 @@ const App = () => {
       <Header />
       <Hero/>
     </div>
-    {/* <div className="container-fluid ml-72 "> */}
-      {/* <About/> */}
-    {/* </div> */}
+    <div className="container-fluid ml-72 ">
+      <About/>
+    </div>
   </>
   );
 };
