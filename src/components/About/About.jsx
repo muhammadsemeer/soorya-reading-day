@@ -28,8 +28,6 @@ export default function About() {
           The <br /> 19th <br /> Annual <br /> Book
           <br /> Festival
         </span>
- 
- 
       </div>
     </div>
   );

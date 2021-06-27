@@ -2,7 +2,7 @@ import React, { createContext } from "react";
 
 export default function Hero() {
   return (
-    <div className="w-full block h-auto pb-16 lg:flex  items-center justify-center ">
+    <div className="w-full block h-auto pb-16 lg:flex mb-10 items-center justify-center ">
       {/* Left Section */}
       <div className="w-full lg:w-1/2 flex flex-col items-start justify-center lg:pb-0 lg:pt-0 pt-14 pb-20">
         <span className="w-full    sm:w-80 font-Mulish text-base lg:text-lg">
