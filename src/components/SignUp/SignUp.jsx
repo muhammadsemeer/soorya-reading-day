@@ -4,7 +4,7 @@ export default function SignUp() {
   return (
     <div className="bg-white w-full min-h-screen text-dark px-8 font-Mulish">
       <div className="w-full flex items-center justify-start py-8">
-        <button className="w-10 border rounded-md border-dark h-10 p-3 flex items-center justify-center text-xl border-opacity-10 outline-none">
+        <button className="text-gray-500 w-10 border rounded-md border-dark h-10 p-3 flex items-center justify-center text-xl border-opacity-10 outline-none">
           <i className="ri-arrow-left-s-line"></i>
         </button>
         <span className="pl-5 text-2xl font-extrabold">Sign Up</span>
