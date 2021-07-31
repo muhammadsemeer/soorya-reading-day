@@ -56,7 +56,7 @@ export default function SignUp() {
         Or sign up with Email
       </span>
       <form action="" className="w-full" autoComplete={"off"}>
-        <div className="input-group flex items-start justify-center flex-col mt-3 ">
+        <div className="input-group flex items-start justify-center flex-col  ">
           <label htmlFor="name" className="text-sm">
             Name
           </label>
