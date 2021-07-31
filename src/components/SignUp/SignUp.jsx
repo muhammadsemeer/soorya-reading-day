@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function SignUp() {
+
+    const [name,setName] = useState("")
+    const [email,setEmail] = useState("")
+    const [password,setPassword] = useState("")
+    const [err,setErr] = useState("email")
+
   return (
     <div className="bg-white w-full min-h-screen text-dark px-8 font-Mulish">
       <div className="w-full flex items-center justify-start py-8">
@@ -9,10 +15,7 @@ export default function SignUp() {
         </button>
         <span className="pl-5 text-2xl font-extrabold">Sign Up</span>
       </div>
-      <div className="w-full">
-        <span className="text-xs inline-block mb-5 text-gray-700">
-          Sign up with Google
-        </span>
+      <div className="w-full mt-5">
         <button className="pointer hover:shadow-md transition transition-duration-300 border rounded-lg h-12 bg-white border-dark w-full py-2 flex items-center justify-center outline-none  text-sm border-opacity-10">
           <svg
             className="mr-3"
@@ -49,11 +52,11 @@ export default function SignUp() {
           Sign Up with Google
         </button>
       </div>
-      <span className="text-xs inline-block mt-5 text-gray-700">
-          Or Sign Up with Email
-        </span>
-      <form action="" className="w-full mt-2" autoComplete={"off"}>
-        <div className="input-group flex items-start justify-center flex-col my-3 ">
+      <span className="text-xs inline-block mt-6 mb-5 text-gray-700">
+        Or sign up with Email
+      </span>
+      <form action="" className="w-full" autoComplete={"off"}>
+        <div className="input-group flex items-start justify-center flex-col mt-3 ">
           <label htmlFor="name" className="text-sm">
             Name
           </label>
@@ -62,10 +65,12 @@ export default function SignUp() {
             name="name"
             id="name"
             placeholder="Eg : John Doe"
-            className="p-3 mt-2 border rounded-lg h-12 bg-white border-dark w-full py-2 flex items-center justify-center outline-none  text-sm border-opacity-10 focus:border-opacity-100 placeholder-dark placeholder-opacity-50 transition transition-duration-600  "
+            className={`${err==="name"?"border-red-500 border-opacity-100":"border-dark border-opacity-10"}  p-3 mt-2 border rounded-lg h-12 bg-white  w-full py-2 flex items-center justify-center outline-none  text-sm focus:border-opacity-100 placeholder-dark placeholder-opacity-50 transition transition-duration-600  `}
           />
         </div>
-        <div className="input-group flex items-start justify-center flex-col my-3 ">
+        <span className="text-xs text-red-500 mb-3">{err==="name"?"Name must contain at least 3 characters.":null}</span>
+
+        <div className="input-group flex items-start justify-center flex-col mt-3 ">
           <label htmlFor="email" className="text-sm">
             Email
           </label>
@@ -74,10 +79,11 @@ export default function SignUp() {
             name="email"
             id="email"
             placeholder="Eg : john@gmail.com"
-            className="p-3 mt-2 border rounded-lg h-12 bg-white border-dark w-full py-2 flex items-center justify-center outline-none  text-sm border-opacity-10 focus:border-opacity-100 placeholder-dark placeholder-opacity-50 transition transition-duration-600  "
+            className={`${err==="email"?"border-red-500 border-opacity-100":"border-dark border-opacity-10"}  p-3 mt-2 border rounded-lg h-12 bg-white  w-full py-2 flex items-center justify-center outline-none  text-sm focus:border-opacity-100 placeholder-dark placeholder-opacity-50 transition transition-duration-600  `}
           />
         </div>
-        <div className="input-group flex items-start justify-center flex-col my-3 ">
+        <span className="text-xs text-red-500 mb-3">{err==="email"?"Email doesn't appear to be valid.":null}</span>
+        <div className="input-group flex items-start justify-center flex-col mt-3 ">
           <label htmlFor="password" className="text-sm">
             Password
           </label>
@@ -86,9 +92,11 @@ export default function SignUp() {
             name="password"
             id="password"
             placeholder="At least 8+ characters"
-            className="p-3 mt-2 border rounded-lg h-12 bg-white border-dark w-full py-2 flex items-center justify-center outline-none  text-sm border-opacity-10 focus:border-opacity-100 placeholder-dark placeholder-opacity-50 transition transition-duration-600  "
+            className={`${err==="password"?"border-red-500 border-opacity-100":"border-dark border-opacity-10"}  p-3 mt-2 border rounded-lg h-12 bg-white  w-full py-2 flex items-center justify-center outline-none  text-sm focus:border-opacity-100 placeholder-dark placeholder-opacity-50 transition transition-duration-600  `}
           />
         </div>
+        <span className="text-xs text-red-500 mb-3">{err==="password"?"Password must contain at least 8 characters.":null}</span>
+
       </form>
       <div className="w-full my-8 flex items-center justify-center ">
         <button
