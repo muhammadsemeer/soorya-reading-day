@@ -30,7 +30,8 @@ module.exports = {
         Mulish: "Mulish",
       },
       screens:{
-        'cs':"1000px"
+        'cs':"1000px",
+        '998':"998px"
       }
     },
   },

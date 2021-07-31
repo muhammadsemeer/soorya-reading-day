@@ -4,6 +4,17 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const Dotenv = require("dotenv-webpack");
 const webpack = require("webpack");
+const ErrorOverlayPlugin = require("error-overlay-webpack-plugin");
+
+const overlay = require("webpack-dev-server/client/overlay");
+const show = overlay.showMessage;
+overlay.showMessage = function (messages) {
+  const newMessages = messages.map((msg) =>
+    msg.split("\n").slice(2).join("\n")
+  );
+
+  show(newMessages);
+};
 
 const devMode = process.env.NODE_ENV !== "production";
 module.exports = {
@@ -52,6 +63,8 @@ module.exports = {
     ],
   },
   plugins: [
+    new ErrorOverlayPlugin(),
+
     new HtmlWebpackPlugin({
       template: "./public/index.html",
       favicon: "./public/favicon.ico",
@@ -75,6 +88,7 @@ module.exports = {
     new Dotenv(),
     new webpack.HotModuleReplacementPlugin(),
   ],
+  devtool: 'cheap-module-source-map', 
   devServer: {
     contentBase: path.join(__dirname, `src`),
     port: 3000,

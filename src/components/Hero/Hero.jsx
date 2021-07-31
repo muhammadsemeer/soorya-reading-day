@@ -10,7 +10,7 @@ export default function Hero() {
           lovers from all over the world in Berlin, Germany. The best worms to
           get inspired together.
         </span>
-        <span className="font-Mak-Bold  text-7xl xl:text-9xl pt-12 pb-5 lg:pb-0 lg:pt-20">
+        <span className="font-Mak-Bold  text-6xl xl:text-9xl pt-12 pb-5 lg:pb-0 lg:pt-20">
           Don't stop reading
         </span>
       </div>

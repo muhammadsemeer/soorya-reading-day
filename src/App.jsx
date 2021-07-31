@@ -12,12 +12,14 @@ const App = () => {
         <Header />
         <Hero />
       </div>
-      {/* <div className="container-fluid ml-72 ">
+      <div className="container-fluid  ">
         <About />
-      </div>  */}
-      <More />
+      </div>  
+      <div className="container mx-auto min-h-screen w-full ">
+        <More />
+      </div>
     </>
-  );
+  );o
 };
 
 export default App;
