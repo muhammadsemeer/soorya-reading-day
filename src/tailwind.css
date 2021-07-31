@@ -12,6 +12,15 @@
 background:#1f1f1f
   }
 
+  input,
+body,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+}
+
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";

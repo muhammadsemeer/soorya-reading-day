@@ -6,7 +6,7 @@ module.exports = {
       backgroundColor: {
         "l-col": "#232323",
         "dark":"#050507",
-        "grey":"#121212"
+        "grey":"#151515"
         
       },
       colors:{

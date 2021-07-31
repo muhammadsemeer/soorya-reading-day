@@ -4,16 +4,16 @@ export default function SignUp() {
   return (
     <div className="bg-white w-full min-h-screen text-dark px-8 font-Mulish">
       <div className="w-full flex items-center justify-start py-8">
-        <button className="text-gray-500 w-10 border rounded-md border-dark h-10 p-3 flex items-center justify-center text-xl border-opacity-10 outline-none">
+        <button className="pointer text-gray-500 w-10 border rounded-md border-dark h-10 p-3 flex items-center justify-center text-xl border-opacity-10 outline-none">
           <i className="ri-arrow-left-s-line"></i>
         </button>
         <span className="pl-5 text-2xl font-extrabold">Sign Up</span>
       </div>
       <div className="w-full">
         <span className="text-xs inline-block mb-5 text-gray-700">
-          Sign up with one of following options.
+          Sign up with Google
         </span>
-        <button className="border rounded-lg h-12 bg-white border-dark w-full py-2 flex items-center justify-center outline-none  text-sm border-opacity-10">
+        <button className="pointer hover:shadow-md transition transition-duration-300 border rounded-lg h-12 bg-white border-dark w-full py-2 flex items-center justify-center outline-none  text-sm border-opacity-10">
           <svg
             className="mr-3"
             width="20"
@@ -49,7 +49,10 @@ export default function SignUp() {
           Sign Up with Google
         </button>
       </div>
-      <form action="" className="w-full mt-5" autoComplete="off">
+      <span className="text-xs inline-block mt-5 text-gray-700">
+          Or Sign Up with Email
+        </span>
+      <form action="" className="w-full mt-2" autoComplete={"off"}>
         <div className="input-group flex items-start justify-center flex-col my-3 ">
           <label htmlFor="name" className="text-sm">
             Name
@@ -63,11 +66,11 @@ export default function SignUp() {
           />
         </div>
         <div className="input-group flex items-start justify-center flex-col my-3 ">
-          <label htmlFor="name" className="text-sm">
+          <label htmlFor="email" className="text-sm">
             Email
           </label>
           <input
-            type="text"
+            type="email"
             name="email"
             id="email"
             placeholder="Eg : john@gmail.com"
@@ -79,7 +82,7 @@ export default function SignUp() {
             Password
           </label>
           <input
-            type="text"
+            type="password"
             name="password"
             id="password"
             placeholder="At least 8+ characters"
@@ -88,14 +91,17 @@ export default function SignUp() {
         </div>
       </form>
       <div className="w-full my-8 flex items-center justify-center ">
-        <button className="s-btn w-full h-12 bg-dark text-sm outline-none text-white rounded-lg ">
+        <button
+          type="submit"
+          className="pointer s-btn w-full h-12 bg-grey text-sm outline-none hover:shadow-lg transition transition-duration-300 text-white rounded-lg "
+        >
           Create Account
         </button>
       </div>
       <div className="w-full flex items-center justify-center text-sm text-gray-600">
         <p>
           Already have an account ?{" "}
-          <span className="font-bold text-dark ">Log in</span>
+          <span className="font-bold text-dark pointer">Log in</span>
         </p>
       </div>
     </div>
