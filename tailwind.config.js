@@ -5,6 +5,9 @@ module.exports = {
     extend: {
       backgroundColor: {
         "l-col": "#232323",
+        "dark":"#050507",
+        "grey":"#121212"
+        
       },
       colors:{
         "light":"#F8F5F1",
