@@ -1,27 +1,48 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./tailwind.css";
-import Header from "./components/Header/Header";
-import Hero from "./components/Hero/Hero";
-import About from "./components/About/About";
-import More from "./components/More/More";
-import SignUp from "./components/SignUp/SignUp";
 import 'remixicon/fonts/remixicon.css'
-
+import {
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Home from "./pages/Home"
+import SignUp from "./pages/Signup";
+import Firebase from "./config/firebase"
+import { AuthContext } from "./contexts/AuthContext";
 const App = () => {
+
+  const { user, setUser } = useContext(AuthContext)
+
+  useEffect(() => {
+    Firebase.auth().onAuthStateChanged((userData) => {
+      if (userData) {
+        console.log(userData)
+        setUser(userData)
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+
+  })
+
   return (
     <>
-      {/* <div className="container px-10 sm:mx-auto min-h-screen w-full ">
-        <Header />
-        <Hero />
-      </div>
-      <div className="container-fluid  ">
-        <About />
-      </div>  
-      <div className="container mx-auto min-h-screen w-full ">
-        <More />
-      </div> */}
+      <Switch>
+        {/* Home */}
+        <Route path="/" exact>
+          <Home />
+        </Route>
 
-      <SignUp/>
+        {/* Signup */}
+        <Route path="/signup">
+          <SignUp />
+        </Route>
+
+      </Switch>
+
     </>
   );
 };

@@ -1,4 +1,5 @@
 import React, { createContext } from "react";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
@@ -26,9 +27,9 @@ export default function Hero() {
             alt=""
           />
         </div>
-        <div className="absolute -right-3 xs:right-0 bottom-5 xs:bottom-0 bg-primary-col font-Mulish text-sm xs:text-base text-white w-20 h-20 xs:w-28 xs:h-28 flex items-center justify-center rounded-full">
+        <Link to="/signup" className="absolute -right-3 xs:right-0 bottom-5 xs:bottom-0 bg-primary-col font-Mulish text-sm xs:text-base text-white w-20 h-20 xs:w-28 xs:h-28 flex items-center justify-center rounded-full">
           <span>start quiz</span>
-        </div>
+        </Link>
       </div>
     </div>
   );

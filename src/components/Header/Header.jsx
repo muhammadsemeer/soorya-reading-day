@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Header() {
+  const {user,setUser }= useContext(AuthContext)
   return (
       <div className="w-full h-32 lg:h-48 flex items-center justify-between ">
       {/* Logo */}
@@ -9,7 +12,7 @@ export default function Header() {
       </div>
       {/* Quiz */}
       <div className="flex items-center justify-center ">
-          <span className="font-Cormorant-Unicase text-2xl font-normal">Quiz</span>
+          <Link to="/signup" className="font-Cormorant-Unicase text-2xl font-normal">{user?"user":"Quiz"}</Link>
       </div>
     </div>
   );
