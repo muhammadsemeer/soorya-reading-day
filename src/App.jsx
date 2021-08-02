@@ -52,6 +52,12 @@ const App = () => {
         <Route path="/signin">
           {isAuth ? <Redirect to="/" /> : <SignIn />}
         </Route>
+
+        {/* Quiz */}
+        <Route path="/quiz">
+        {isAuth ? <Quiz /> : <Redirect to="/signin" />}
+        </Route>
+
       </Switch>
 
     </>
