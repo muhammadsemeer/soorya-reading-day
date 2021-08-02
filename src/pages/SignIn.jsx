@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
-import SignUp from "../components/SignUp/SignUp"
+import SignIn from "../components/SignIn/SignIn"
 import { AuthContext } from "../contexts/AuthContext"
 
-export default function Signup() {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+export default function Signin() {
+    const [email, setEmail] = useState("soorya@gmail.com");
+    const [password, setPassword] = useState("soorya");
     const [err, setErr] = useState("");
-    const { handleSignup, loading, setLoading } = useContext(AuthContext)
+    const { handleSignin, loading, setLoading } = useContext(AuthContext)
     //validate form
     const validateForm = (e) => {
         e.preventDefault()
@@ -16,10 +15,7 @@ export default function Signup() {
         const re =
             /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
         const emailStatus = re.test(email);
-
-        if (name.length < 3) {
-            setErr("name")
-        } else if (password.length < 6) {
+        if (password.length < 6) {
             setErr("password")
         } else if (!emailStatus) {
             setErr("email")
@@ -27,11 +23,11 @@ export default function Signup() {
         else {
             setErr("")
             setLoading(true)
-            handleSignup(name, email, password)
+            handleSignin(email, password)
         }
     }
 
     return (
-        <SignUp data={[name, setName, email, setEmail, password, setPassword, err, setErr, validateForm]} />
+        <SignIn data={[email, setEmail, password, setPassword, err, setErr, validateForm]} />
     )
 }

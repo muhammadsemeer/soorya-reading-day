@@ -4,32 +4,39 @@ import 'remixicon/fonts/remixicon.css'
 import {
   Switch,
   Route,
-  Link
+  Link, useHistory, Redirect
 } from "react-router-dom";
 import Home from "./pages/Home"
 import SignUp from "./pages/Signup";
 import Firebase from "./config/firebase"
 import { AuthContext } from "./contexts/AuthContext";
+import SignIn from "./pages/SignIn";
+import Loader from "./components/Loader/Loader"
+
 const App = () => {
 
-  const { user, setUser } = useContext(AuthContext)
+  const { user, setUser, isAuth, setIsAuth, loading, setLoading } = useContext(AuthContext)
+
+  const history = useHistory();
 
   useEffect(() => {
     Firebase.auth().onAuthStateChanged((userData) => {
       if (userData) {
-        console.log(userData)
-        setUser(userData)
-        // ...
+        const { displayName, email, uid } = userData;
+        setUser({ name: displayName, email, uid })
+        setIsAuth(true)
+        setLoading(false)
       } else {
-        // User is signed out
-        // ...
+        setIsAuth(false)
+        setLoading(false)
       }
     });
 
-  })
+  }, [])
 
   return (
     <>
+      {loading && <Loader />}
       <Switch>
         {/* Home */}
         <Route path="/" exact>
@@ -38,9 +45,13 @@ const App = () => {
 
         {/* Signup */}
         <Route path="/signup">
-          <SignUp />
+          {isAuth ? <Redirect to="/" /> : <SignUp />}
         </Route>
 
+        {/* Signin */}
+        <Route path="/signin">
+          {isAuth ? <Redirect to="/" /> : <SignIn />}
+        </Route>
       </Switch>
 
     </>

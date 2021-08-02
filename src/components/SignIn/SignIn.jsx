@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function SignUp(props) {
-  const [name, setName, email, setEmail, password, setPassword, err, setErr, validateForm] = props.data
+export default function SignIn(props) {
+  const [ email, setEmail, password, setPassword, err, setErr, validateForm] = props.data
 
   return (
     <div className="bg-white w-full min-h-screen text-dark px-8 font-Mulish">
@@ -10,7 +10,7 @@ export default function SignUp(props) {
         <Link to="/" className="pointer text-gray-500 transition transition-duration-300 hover:shadow-lg w-10 border rounded-md border-dark h-10 p-3 flex items-center justify-center text-xl border-opacity-10 outline-none">
           <i className="ri-arrow-left-s-line"></i>
         </Link>
-        <span className="pl-5 text-2xl font-extrabold">Sign Up</span>
+        <span className="pl-5 text-2xl font-extrabold">Sign In</span>
       </div>
       <div className="w-full mt-5">
         <button className="pointer hover:shadow-md transition transition-duration-300 border rounded-lg h-12 bg-white border-dark w-full py-2 flex items-center justify-center outline-none  text-sm border-opacity-10">
@@ -46,30 +46,14 @@ export default function SignUp(props) {
               clipRule="evenodd"
             ></path>
           </svg>{" "}
-          Sign Up with Google
+          Sign In with Google
         </button>
       </div>
       <span className="text-xs inline-block mt-6 mb-5 text-gray-700">
-        Or sign up with Email
+        Or sign in with Email
       </span>
       <form action="" className="w-full" autoComplete={"off"} onSubmit={validateForm}>
-        <div className="input-group flex items-start justify-center flex-col  ">
-          <label htmlFor="name" className="text-sm">
-            Name
-          </label>
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Eg : John Doe"
-            className={`${err === "name"
-              ? "border-red-500 border-opacity-100"
-              : "border-dark border-opacity-10"
-              }  p-3 mt-2 border rounded-lg h-12 bg-white  w-full py-2 flex items-center justify-center outline-none  text-sm focus:border-opacity-100 placeholder-dark placeholder-opacity-50 transition transition-duration-600  `}
-          />
-        </div>
+ 
         <span className="text-xs text-red-500 mb-3">
           {err === "name" ? "Name must contain at least 3 characters." : null}
         </span>
@@ -121,14 +105,14 @@ export default function SignUp(props) {
             type="submit"
             className="pointer s-btn w-full h-12 bg-grey text-sm outline-none hover:shadow-lg transition transition-duration-300 text-white rounded-lg "
           >
-            Create Account
+            Sign in
           </button>
         </div>
       </form>
       <div className="w-full flex items-center justify-center text-sm text-gray-600">
         <p>
-          Already have an account ?
-          <Link to='/signin' className="font-bold text-dark pointer"> Log in</Link>
+          Don't have an account yet?
+          <Link to="/signup" className="font-bold text-dark pointer"> Sign up</Link>
         </p>
       </div>
     </div>
