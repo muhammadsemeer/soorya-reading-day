@@ -2,7 +2,8 @@ import React, { createContext, useState } from "react"
 import { useHistory } from "react-router-dom";
 import firebase from "../config/firebase"
 const db = firebase.firestore()
-// var provider = new firebase.auth.GoogleAuthProvider();
+
+// const googleProvider = new firebase.auth.GoogleAuthProvider()
 
 export const AuthContext = createContext();
 
@@ -11,6 +12,8 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isAuth, setIsAuth] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [quiz, setQuiz] = useState([]);
+    const [Alert, setAlert] = useState({status:false,msg:""});
     const history = useHistory();
 
     //Handle signup
@@ -25,21 +28,30 @@ export const AuthProvider = ({ children }) => {
                     uid: ref.user.uid,
                     name: name,
                     email: email,
+                    questionNo: 1,
+                    score: 0
                 }
                 db.collection("users").add(user)
                     .then(() => {
                         handleSignin(email, password)
                     })
                     .catch((error) => {
-                        console.error("Error adding document: ", error);
+                        setAlert({status:false,msg:"Something went wrong please try again"})
                     });
 
             })
             .catch(error => {
                 var errorCode = error.code;
                 if (errorCode === "auth/email-already-in-use") {
-                    alert("auth/email-already-in-use")
+                    setAlert({status:true,msg:"Email already exists please sign in"})
+                    setLoading(false)
+                } else {
+                    setAlert({status:true,msg:"Something went wrong please try again"})
+                    setLoading(false)
                 }
+                setTimeout(() => {
+                    setAlert({status:false,msg:""})
+                }, 5000);
             })
     }
 
@@ -50,12 +62,11 @@ export const AuthProvider = ({ children }) => {
                 history.push("/quiz")
             })
             .catch((error) => {
-                var errorCode = error.code;
-                if (errorCode === "auth/email-already-in-use") {
-                    alert("auth/email-already-in-use")
-                } else {
-                    alert(error.code)
-                }
+                setAlert({status:true,msg:"Something went wrong please try again"})
+                setLoading(false)
+                setTimeout(() => {
+                    setAlert({status:false,msg:""})
+                }, 5000);
             });
 
     }
@@ -67,7 +78,6 @@ export const AuthProvider = ({ children }) => {
             setUser(null)
             setIsAuth(false)
         }, function (error) {
-            console.error('Sign Out Error', error);
         });
 
     }
@@ -75,16 +85,21 @@ export const AuthProvider = ({ children }) => {
 
     // Handle Google Auth
     const handleGoogleAuth = () => {
-        firebase.auth.signInWithPopup(googleProvider).then((res) => {
+
+        firebase.auth().signInWithPopup(provider).then((res) => {
             console.log(res.user)
         }).catch((error) => {
-            console.log(error.message)
+            setAlert({status:true,msg:"Something went wrong please try again"})
+            setLoading(false)
+            setTimeout(() => {
+                setAlert({status:false,msg:""})
+            }, 5000);
         })
 
     }
 
     const value = {
-        handleSignup, user, setUser, isAuth, setIsAuth, handleSignout, handleSignin, loading, setLoading
+        handleSignup, user, setUser, isAuth, setIsAuth, handleSignout, handleSignin, loading, setLoading, handleGoogleAuth, quiz, setQuiz, Alert
     }
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

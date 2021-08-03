@@ -13,6 +13,7 @@ import { AuthContext } from "./contexts/AuthContext";
 import SignIn from "./pages/SignIn";
 import Loader from "./components/Loader/Loader"
 import Quiz from "./pages/Quiz"
+import Add from "./components/Add/Add";
 
 const App = () => {
 
@@ -58,7 +59,10 @@ const App = () => {
         <Route path="/quiz">
           <Quiz /> 
         </Route>
-
+         {/* Add */}
+         <Route path="/add">
+          <Add/> 
+        </Route>
       </Switch>
 
     </>

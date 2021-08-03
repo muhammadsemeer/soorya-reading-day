@@ -1,4 +1,4 @@
-import firebase from "firebase"
+import firebase from 'firebase';
 
 var firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -8,5 +8,6 @@ var firebaseConfig = {
     messagingSenderId: process.env.MESSAGING_SENDER_ID,
     appId: process.env.APP_ID,
 };
+
 // Initialize Firebase
 export default firebase.initializeApp(firebaseConfig);
