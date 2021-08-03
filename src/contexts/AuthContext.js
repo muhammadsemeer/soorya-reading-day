@@ -1,7 +1,8 @@
 import React, { createContext, useState } from "react"
 import { useHistory } from "react-router-dom";
-import Firebase from "../config/firebase"
-const db = Firebase.firestore()
+import firebase from "../config/firebase"
+const db = firebase.firestore()
+// var provider = new firebase.auth.GoogleAuthProvider();
 
 export const AuthContext = createContext();
 
@@ -14,7 +15,7 @@ export const AuthProvider = ({ children }) => {
 
     //Handle signup
     const handleSignup = (name, email, password) => {
-        Firebase.auth()
+        firebase.auth()
             .createUserWithEmailAndPassword(email, password)
             .then((ref) => {
                 ref.user.updateProfile({
@@ -44,9 +45,9 @@ export const AuthProvider = ({ children }) => {
 
     //Handle signin
     const handleSignin = (email, password) => {
-        Firebase.auth().signInWithEmailAndPassword(email, password)
+        firebase.auth().signInWithEmailAndPassword(email, password)
             .then(() => {
-                history.push("/")
+                history.push("/quiz")
             })
             .catch((error) => {
                 var errorCode = error.code;
@@ -61,13 +62,24 @@ export const AuthProvider = ({ children }) => {
 
     //Handle Signout
     const handleSignout = () => {
-        Firebase.auth().signOut().then(function () {
+        firebase.auth().signOut().then(function () {
             history.push("/")
             setUser(null)
             setIsAuth(false)
         }, function (error) {
             console.error('Sign Out Error', error);
         });
+
+    }
+
+
+    // Handle Google Auth
+    const handleGoogleAuth = () => {
+        firebase.auth.signInWithPopup(googleProvider).then((res) => {
+            console.log(res.user)
+        }).catch((error) => {
+            console.log(error.message)
+        })
 
     }
 

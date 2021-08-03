@@ -12,6 +12,7 @@ import Firebase from "./config/firebase"
 import { AuthContext } from "./contexts/AuthContext";
 import SignIn from "./pages/SignIn";
 import Loader from "./components/Loader/Loader"
+import Quiz from "./pages/Quiz"
 
 const App = () => {
 
@@ -55,7 +56,7 @@ const App = () => {
 
         {/* Quiz */}
         <Route path="/quiz">
-        {isAuth ? <Quiz /> : <Redirect to="/signin" />}
+          <Quiz /> 
         </Route>
 
       </Switch>
