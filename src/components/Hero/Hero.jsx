@@ -34,5 +34,3 @@ export default function Hero() {
     </div>
   );
 }
-
-console.log("Hello World");

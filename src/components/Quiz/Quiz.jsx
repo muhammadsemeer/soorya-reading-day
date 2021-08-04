@@ -2,30 +2,31 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import firebase from "../../config/firebase";
+import { QuizContext } from "../../contexts/QuizContext";
 
 export default function Quiz() {
   const [active, setActive] = useState(true);
-  const { quiz, setQuiz, user } = useContext(AuthContext);
+  const { quiz, setQuiz,handleAnswer } = useContext(QuizContext);
+  const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    // firebase.auth().onAuthStateChanged((userData) => {
-    //   if (userData) {
-    //     let tempArray = quiz;
+  useEffect(async () => {
+    if (user) {
+      let ref = await firebase
+        .firestore()
+        .collection("quiz")
+        .where("id", "==", user.questionNo)
+        .get();
+      let tempArray = ref.docs.map((doc) => doc.data())[0];
+      setQuiz(tempArray);
+    }
+  }, [user]);
 
-    //     tempArray.forEach((question) => {
-    //       if (question.id === questionNo) {
-    //         question.active = true;
-    //       } else {
-    //         question.active = false;
-    //       }
-    //     });
 
-    //     // console.log(tempArray);
-    //   }
-    // });
-  }, []);
+
+
   return (
     <div className="bg-white w-full min-h-screen text-dark-700 px-8 font-Mulish relative">
+      {console.log(quiz)}
       {/* Top */}
       <div className="w-full flex items-center justify-between py-8">
         <Link
@@ -43,28 +44,24 @@ export default function Quiz() {
         {/* Qn */}
         <div className="mb-5">
           <span className="text-xl font-bold " style={{ color: "#39395e" }}>
-            4. When was the first National Reading Day observed?
+            {quiz?.question}
           </span>
         </div>
         {/* Answers */}
-        <div className="pointer mt-5 hover:shadow-md transition transition-duration-300 border shadow-sm cursor-pointer rounded-lg h-12 pl-5 bg-white border-dark w-full py-2 flex items-center justify-start outline-none  text-base border-opacity-10">
-          14 July 2020
-        </div>
-        <div className="pointer mt-5 hover:shadow-md transition transition-duration-300 border shadow-sm cursor-pointer rounded-lg h-12 pl-5 bg-white border-dark w-full py-2 flex items-center justify-start outline-none  text-base border-opacity-10">
-          14 July 2020
-        </div>
-        <div className="pointer mt-5 hover:shadow-md transition transition-duration-300 border shadow-sm cursor-pointer rounded-lg h-12 pl-5 bg-white border-dark w-full py-2 flex items-center justify-start outline-none  text-base border-opacity-10">
-          14 July 2020
-        </div>
-        <div
-          className={`${
-            active
-              ? "bg-indigo-500 shadow-md text-white"
-              : "border border-opacity-10 border-dark text-dark "
-          }  pointer mt-5 hover:shadow-md transition transition-duration-300   cursor-pointer rounded-lg h-12 pl-5 bg-white  w-full py-2 flex items-center justify-start outline-none  text-base `}
-        >
-          14 July 2020
-        </div>
+  {quiz?.answerOptions.map((option,index)=>(
+   <div
+   onClick={() =>handleAnswer(index)}
+   key={index}
+   className={`${
+     option.active===true
+       ? "bg-indigo-500 shadow-md text-white"
+       : "border border-opacity-10 border-dark text-dark "
+   }  pointer mt-5 hover:shadow-md transition transition-duration-300   cursor-pointer rounded-lg h-12 pl-5 bg-white  w-full py-2 flex items-center justify-start outline-none  text-base `}
+ >
+   {option.answerText}
+ </div>
+  ))}
+     
       </div>
       <div className="w-full flex items-center justify-between left-0 absolute bottom-10 px-8">
         <button className="w-1/2 h-12 py-2  transition transition-duration-300 ease-in transform hover:scale-105 outline-none  rounded-md text-indigo-600">

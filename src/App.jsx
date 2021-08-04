@@ -4,68 +4,54 @@ import 'remixicon/fonts/remixicon.css'
 import {
   Switch,
   Route,
-  Link, useHistory, Redirect
+  useHistory
 } from "react-router-dom";
 import Home from "./pages/Home"
-import SignUp from "./pages/Signup";
-import Firebase from "./config/firebase"
+import SignUp from "./pages/Signup"
 import { AuthContext } from "./contexts/AuthContext";
-import SignIn from "./pages/SignIn";
+import SignIn from "./pages/SignIn"
 import Loader from "./components/Loader/Loader"
 import Quiz from "./pages/Quiz"
 import Add from "./components/Add/Add";
+import Private from "./components/Private/Private"
 
 const App = () => {
-
-  const { user, setUser, isAuth, setIsAuth, loading, setLoading } = useContext(AuthContext)
-
   const history = useHistory();
-
-  useEffect(() => {
-    Firebase.auth().onAuthStateChanged((userData) => {
-      if (userData) {
-        const { displayName, email, uid } = userData;
-        setUser({ name: displayName, email, uid })
-        setIsAuth(true)
-        setLoading(false)
-      } else {
-        setIsAuth(false)
-        setLoading(false)
-      }
-    });
-
-  }, [])
-
+  const { loading,user } = useContext(AuthContext)
   return (
     <>
       {loading && <Loader />}
-      <Switch>
+
+      <Switch  >
         {/* Home */}
-        <Route path="/" exact>
-          <Home />
-        </Route>
+        <Route path="/" exact component={Home} />
 
         {/* Signup */}
-        <Route path="/signup">
-          {isAuth ? <Redirect to="/" /> : <SignUp />}
-        </Route>
+        <Private path="/signup"  >
+          <SignUp />
+        </Private>
+
 
         {/* Signin */}
-        <Route path="/signin">
-          {isAuth ? <Redirect to="/" /> : <SignIn />}
-        </Route>
+        <Private path="/signin"  >
+          <SignIn />
+        </Private>
+
 
         {/* Quiz */}
-        <Route path="/quiz">
-          <Quiz /> 
+        <Private path="/quiz"  >
+          <Quiz />
+        </Private>
+
+        {/* Add */}
+        <Route path="/add">
+          <Add />
         </Route>
-         {/* Add */}
-         <Route path="/add">
-          <Add/> 
-        </Route>
+
       </Switch>
 
     </>
+
   );
 };
 

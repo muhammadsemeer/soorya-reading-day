@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react"
+import React, { createContext, useEffect, useState } from "react"
 import { useHistory } from "react-router-dom";
 import firebase from "../config/firebase"
 const db = firebase.firestore()
@@ -12,9 +12,22 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isAuth, setIsAuth] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [quiz, setQuiz] = useState([]);
-    const [Alert, setAlert] = useState({status:false,msg:""});
+    const [Alert, setAlert] = useState({ status: false, msg: "" });
     const history = useHistory();
+
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged(async (userData) => {
+            if (userData) {
+                let ref = await firebase.firestore().collection("users").where("uid", "==", userData.uid).get();
+                setUser(ref.docs.map((doc) => doc.data())[0])
+                setIsAuth(true)
+                setLoading(false)
+            } else {
+                setIsAuth(false)
+                setLoading(false)
+            }
+        });
+    }, [])
 
     //Handle signup
     const handleSignup = (name, email, password) => {
@@ -36,21 +49,21 @@ export const AuthProvider = ({ children }) => {
                         handleSignin(email, password)
                     })
                     .catch((error) => {
-                        setAlert({status:false,msg:"Something went wrong please try again"})
+                        setAlert({ status: false, msg: "Something went wrong please try again" })
                     });
 
             })
             .catch(error => {
                 var errorCode = error.code;
                 if (errorCode === "auth/email-already-in-use") {
-                    setAlert({status:true,msg:"Email already exists please sign in"})
+                    setAlert({ status: true, msg: "Email already exists please sign in" })
                     setLoading(false)
                 } else {
-                    setAlert({status:true,msg:"Something went wrong please try again"})
+                    setAlert({ status: true, msg: "Something went wrong please try again" })
                     setLoading(false)
                 }
                 setTimeout(() => {
-                    setAlert({status:false,msg:""})
+                    setAlert({ status: false, msg: "" })
                 }, 5000);
             })
     }
@@ -62,10 +75,10 @@ export const AuthProvider = ({ children }) => {
                 history.push("/quiz")
             })
             .catch((error) => {
-                setAlert({status:true,msg:"Something went wrong please try again"})
+                setAlert({ status: true, msg: "Something went wrong please try again" })
                 setLoading(false)
                 setTimeout(() => {
-                    setAlert({status:false,msg:""})
+                    setAlert({ status: false, msg: "" })
                 }, 5000);
             });
 
@@ -89,17 +102,17 @@ export const AuthProvider = ({ children }) => {
         firebase.auth().signInWithPopup(provider).then((res) => {
             console.log(res.user)
         }).catch((error) => {
-            setAlert({status:true,msg:"Something went wrong please try again"})
+            setAlert({ status: true, msg: "Something went wrong please try again" })
             setLoading(false)
             setTimeout(() => {
-                setAlert({status:false,msg:""})
+                setAlert({ status: false, msg: "" })
             }, 5000);
         })
 
     }
 
     const value = {
-        handleSignup, user, setUser, isAuth, setIsAuth, handleSignout, handleSignin, loading, setLoading, handleGoogleAuth, quiz, setQuiz, Alert
+        handleSignup, user, setUser, isAuth, setIsAuth, handleSignout, handleSignin, loading, setLoading, handleGoogleAuth, Alert
     }
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
