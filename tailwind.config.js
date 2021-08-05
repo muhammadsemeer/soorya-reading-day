@@ -32,6 +32,7 @@ module.exports = {
         "Mak-Bold": "Mak-Bold",
         "Cormorant-Unicase": "Cormorant Unicase",
         Mulish: "Mulish",
+        Roboto:"Roboto"
       },
       screens:{
         'cs':"1000px",

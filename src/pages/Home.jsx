@@ -3,6 +3,7 @@ import Header from "../components/Header/Header";
 import Hero from "../components/Hero/Hero";
 import About from "../components/About/About";
 import More from "../components/More/More";
+import Footer from '../components/Footer/Footer';
 
 export default function Home() {
     return (
@@ -18,6 +19,7 @@ export default function Home() {
             <div className="container mx-auto min-h-screen w-full ">
                 <More />
             </div>
+            <Footer/>
         </>
     )
 }

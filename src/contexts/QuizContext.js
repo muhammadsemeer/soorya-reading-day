@@ -65,18 +65,22 @@ export const QuizProvider = ({ children }) => {
 
     // Handle Next
     const handleNext = () => {
-        setLoading(true)
-        let status = validateAnswer()
+        if (answer != null) {
+            setLoading(true)
+            let status = validateAnswer()
 
-        if (status) {
-            handleQuiz(true)
+            if (status) {
+                handleQuiz(true)
+            } else {
+                handleQuiz(false)
+            }
+
         } else {
             handleQuiz(false)
         }
-
+        setAnswer(null)
         setQuiz(null)
         getUserData()
-
     }
 
 

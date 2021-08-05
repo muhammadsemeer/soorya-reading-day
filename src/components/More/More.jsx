@@ -21,7 +21,7 @@ export default function More() {
       <div className="w-full 998-w-1/2 flex items-center justify-end pt-8">
         <img
           src={
-            "https://images.unsplash.com/photo-1540949268152-31caafdbfe10?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+            "https://images.unsplash.com/photo-1546098073-e1df70b3bc7c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80"
           }
           alt=""
           className="w-full  "

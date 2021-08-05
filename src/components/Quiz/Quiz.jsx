@@ -10,8 +10,8 @@ export default function Quiz() {
   const { user, setLoading } = useContext(AuthContext);
 
   useEffect(async () => {
-    console.log(quiz === null)
-    if (user && quiz===null) {
+    console.log(quiz === null);
+    if (user && quiz === null) {
       let ref = await firebase
         .firestore()
         .collection("quiz")
@@ -21,7 +21,7 @@ export default function Quiz() {
       setQuiz(tempArray);
       setLoading(false);
     }
-  }, [user, answer,quiz]);
+  }, [user, answer, quiz]);
 
   return (
     <div className="bg-white w-full min-h-screen text-dark-700 px-8 font-Mulish relative">
@@ -48,8 +48,8 @@ export default function Quiz() {
         {/* Answers */}
         {quiz?.answerOptions.map((option, index) => (
           <div
+            key={option.answerText}
             onClick={() => handleAnswer(index)}
-            key={index}
             className={`${
               option.active
                 ? "bg-indigo-500 shadow-md text-white"

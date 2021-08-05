@@ -14,10 +14,12 @@ import Loader from "./components/Loader/Loader"
 import Quiz from "./pages/Quiz"
 import Add from "./components/Add/Add";
 import Private from "./components/Private/Private"
+import Profile from "./pages/Profile";
+import Error from "./components/Error/Error";
 
 const App = () => {
   const history = useHistory();
-  const { loading,user } = useContext(AuthContext)
+  const { loading, user } = useContext(AuthContext)
   return (
     <>
       {loading && <Loader />}
@@ -43,9 +45,15 @@ const App = () => {
           <Quiz />
         </Private>
 
+        {/* Profile */}
+        <Private path="/profile"  >
+          <Profile />
+        </Private>
+
+
         {/* Add */}
-        <Route path="/add">
-          <Add />
+        <Route path="/error">
+          <Error />
         </Route>
 
       </Switch>
