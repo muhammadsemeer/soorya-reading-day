@@ -1,6 +1,7 @@
-import React, { createContext, useEffect, useState } from "react"
+import React, { createContext, useContext, useEffect, useState } from "react"
 import { useHistory } from "react-router-dom";
 import firebase from "../config/firebase"
+import { QuizContext } from "./QuizContext";
 const db = firebase.firestore()
 
 // const googleProvider = new firebase.auth.GoogleAuthProvider()
@@ -9,19 +10,21 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 
+    const [score, setScore] = useState(0);
     const [user, setUser] = useState(null);
     const [isAuth, setIsAuth] = useState(false);
     const [loading, setLoading] = useState(true);
     const [Alert, setAlert] = useState({ status: false, msg: "" });
     const history = useHistory();
-
     useEffect(() => {
         firebase.auth().onAuthStateChanged(async (userData) => {
             if (userData) {
                 let ref = await firebase.firestore().collection("users").where("uid", "==", userData.uid).get();
-                setUser(ref.docs.map((doc) => doc.data())[0])
-                setIsAuth(true)
-                setLoading(false)
+                let userRef = ref.docs.map((doc) => doc.data())[0]
+                setUser(userRef)
+                setScore(userRef.score)
+                setIsAuth(true) 
+                setLoading(false)   
             } else {
                 setIsAuth(false)
                 setLoading(false)
@@ -29,6 +32,8 @@ export const AuthProvider = ({ children }) => {
         });
     }, [])
 
+
+    
     //Handle signup
     const handleSignup = (name, email, password) => {
         firebase.auth()
@@ -45,7 +50,9 @@ export const AuthProvider = ({ children }) => {
                     score: 0
                 }
                 db.collection("users").add(user)
-                    .then(() => {
+                    .then((docRef) => {
+                        console.log(docRef.id);
+                        localStorage.setItem("docId", docRef.id);
                         handleSignin(email, password)
                     })
                     .catch((error) => {
@@ -112,7 +119,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     const value = {
-        handleSignup, user, setUser, isAuth, setIsAuth, handleSignout, handleSignin, loading, setLoading, handleGoogleAuth, Alert
+        handleSignup, user, setUser, isAuth, setIsAuth, handleSignout, handleSignin, loading, setLoading, handleGoogleAuth, Alert,score, setScore
     }
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

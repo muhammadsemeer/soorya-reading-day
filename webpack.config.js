@@ -88,7 +88,7 @@ module.exports = {
     new Dotenv(),
     new webpack.HotModuleReplacementPlugin(),
   ],
-  devtool: 'cheap-module-source-map', 
+  devtool: 'cheap-module-source-map',
   devServer: {
     contentBase: path.join(__dirname, `src`),
     port: 3000,
